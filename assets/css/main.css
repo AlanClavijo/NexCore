@@ -51,35 +51,38 @@ body {
   padding: 0 5%;
 }
 
+/* --- AJUSTE MODO NORMAL (ESCRITORIO): SEPARACIÓN HEADER/TEXTO --- */
+.nexcore-header.static-header {
+  position: relative;
+  top: 0;
+  margin-bottom: 40px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
 }
 
-/* --- CAJA DEL LOGO (ACTUALIZADO: Grande, Redondeada y Segura) --- */
+/* --- CAJA DEL LOGO --- */
 .logo-box {
   background-color: var(--color-white);
-  padding: 10px 30px; /* Padding equilibrado */
-
-  /* BORDES REDONDEADOS */
+  padding: 10px 30px;
   border-radius: 35px;
-
-  /* CLAVE: Esto recorta cualquier esquina cuadrada de la imagen interna */
   overflow: hidden;
-
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  /* Dimensiones flexibles para logo grande */
   min-height: 110px;
   min-width: 230px;
-
   transition: transform 0.3s ease;
+  z-index: 1001;
 }
 
 .logo-box:hover {
@@ -87,16 +90,26 @@ body {
 }
 
 .logo-img {
-  /* TAMAÑO GRANDE */
   max-height: 120px;
   width: auto;
   display: block;
-
-  /* OPCIONAL: Redondea la propia imagen (útil si tiene fondo) */
   border-radius: 15px;
-
-  /* Asegura que la imagen se ajuste bien */
   object-fit: contain;
+}
+
+/* Botón Hamburguesa (Oculto en Desktop) */
+.mobile-nav-toggle {
+  display: none;
+  background: var(--color-white);
+  border: none;
+  font-size: 1.8rem;
+  color: var(--color-secondary);
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1002;
+  transition: all 0.3s ease;
 }
 
 .nav-wrapper {
@@ -129,7 +142,7 @@ body {
 
 .social-icon:hover {
   background-color: var(--color-secondary);
-  transform: translateY(-3px); /* Feedback visual sutil */
+  transform: translateY(-3px);
 }
 
 /* Barra de Menú */
@@ -152,10 +165,54 @@ body {
   font-weight: 500;
   font-size: 1rem;
   transition: var(--transition-fast);
+  position: relative; /* Necesario para la línea del indicador */
 }
 
 .menu-bar a:hover {
   color: var(--color-primary);
+}
+
+/* === INDICADOR DE PESTAÑA ACTIVA (DESKTOP) === */
+.menu-bar a.active-link {
+  color: var(--color-primary);
+}
+
+/* Línea naranja debajo de la opción activa */
+.menu-bar a.active-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Link de inicio móvil (Oculto en Desktop) */
+.mobile-home-link {
+  display: none;
+}
+
+/* =============================================================================
+   FIX DE ESPACIO PARA HEADER (ESCRITORIO)
+   Añade separación superior a las páginas internas para que el menú no tape el título
+=============================================================================
+*/
+.about-hero,       /* Nosotros */
+.services-hero,    /* Servicios */
+.tech-hero,        /* Tecnología */
+.news-page-header, /* Noticias (Lista) */
+.recruit-hero,     /* Reclutamiento */
+.article-hero {
+  /* Artículo de Blog */
+  padding-top: 220px !important;
+}
+
+/* El Home (Carrusel) NO lleva este padding */
+.hero-carousel {
+  padding-top: 0;
 }
 
 /* =============================================================================
@@ -189,8 +246,6 @@ body {
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   z-index: 1;
-
-  /* Espacio inferior para evitar choque con la ola y el botón de scroll */
   padding-bottom: 120px;
 }
 
@@ -199,7 +254,6 @@ body {
   z-index: 2;
 }
 
-/* Overlay oscuro para mejorar legibilidad del texto sobre imágenes */
 .slide::before {
   content: "";
   position: absolute;
@@ -214,12 +268,11 @@ body {
   position: relative;
   z-index: 3;
   text-align: center;
-  /* CORRECCIÓN: Aumentamos el margen superior para separar el título del Header */
   margin-top: 140px;
   color: var(--color-white);
 }
 
-/* --- Animaciones de Entrada (Staggered Animations) --- */
+/* --- Animaciones de Entrada --- */
 .slide-content h1,
 .slide-content p,
 .slide-content .btn-action {
@@ -228,7 +281,6 @@ body {
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Retrasos escalonados para efecto en cascada */
 .slide-content h1 {
   transition-delay: 0.5s;
 }
@@ -239,7 +291,6 @@ body {
   transition-delay: 0.9s;
 }
 
-/* Estado Activo */
 .slide.active .slide-content h1,
 .slide.active .slide-content p,
 .slide.active .slide-content .btn-action {
@@ -265,7 +316,6 @@ body {
   font-weight: 500;
 }
 
-/* Botón de Acción Principal (CTA) */
 .btn-action {
   display: inline-block;
   background-color: var(--color-secondary);
@@ -284,10 +334,8 @@ body {
   transform: scale(1.05);
 }
 
-/* Indicador de Scroll (Ratón) */
 .scroll-down-indicator {
   position: absolute;
-  /* Mantenemos la altura corregida para la ola */
   bottom: 90px;
   left: 50%;
   transform: translateX(-50%);
@@ -481,12 +529,10 @@ body {
   text-align: left;
   position: relative;
   overflow: hidden;
-  /* Transición estándar para la tarjeta */
   transition: transform var(--transition-fast),
     box-shadow var(--transition-fast);
   display: flex;
   flex-direction: column;
-  /* Mejora visual: Sombra más pronunciada */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -495,7 +541,6 @@ body {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-/* Micro-interacción: El icono reacciona al hover del padre */
 .service-card:hover .service-icon {
   transform: scale(1.1) rotate(5deg);
   background: rgba(255, 255, 255, 0.3);
@@ -522,10 +567,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* Transición suave tipo "rebote" para el icono */
   transition: all var(--transition-smooth);
-  border: 2px solid transparent; /* Reserva espacio para el borde en hover */
+  border: 2px solid transparent;
 }
 
 .service-card h3 {
@@ -582,12 +625,12 @@ body {
 }
 
 /* =============================================================================
-   SECCIÓN BLOG (HOME) - Estilos actualizados
+   SECCIÓN BLOG (HOME)
 =============================================================================
 */
 .section-blog {
   padding: 100px 5%;
-  background-color: #f9f9f9; /* Fondo gris muy claro para diferenciar */
+  background-color: #f9f9f9;
 }
 
 .container-blog {
@@ -617,15 +660,12 @@ body {
   line-height: 1.1;
 }
 
-/* Grid de 3 Columnas */
 .blog-grid {
   display: grid;
-  /* Asegura 3 columnas en pantallas grandes, se adapta en pequeñas */
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 40px;
 }
 
-/* Tarjeta de Noticia */
 .blog-card {
   background-color: #fff;
   border-radius: 20px;
@@ -643,11 +683,10 @@ body {
   border-color: var(--color-accent);
 }
 
-/* Imagen de la tarjeta */
 .blog-image-wrapper {
   position: relative;
   width: 100%;
-  height: 240px; /* Altura fija para uniformidad */
+  height: 240px;
   overflow: hidden;
 }
 
@@ -659,10 +698,9 @@ body {
 }
 
 .blog-card:hover .blog-image-wrapper img {
-  transform: scale(1.1); /* Efecto zoom suave al hover */
+  transform: scale(1.1);
 }
 
-/* Etiquetas de Categoría */
 .blog-category {
   position: absolute;
   top: 20px;
@@ -685,7 +723,6 @@ body {
   background-color: var(--color-accent);
 }
 
-/* Contenido de la tarjeta */
 .blog-content {
   padding: 30px;
   flex-grow: 1;
@@ -727,10 +764,9 @@ body {
   color: #666;
   line-height: 1.6;
   margin-bottom: 25px;
-  flex-grow: 1; /* Empuja el botón hacia abajo */
+  flex-grow: 1;
 }
 
-/* Pie de la tarjeta (Botón) */
 .blog-footer-card {
   margin-top: auto;
   padding-top: 20px;
@@ -762,20 +798,8 @@ body {
   transform: translateX(5px);
 }
 
-/* Responsive para el grid */
-@media (max-width: 768px) {
-  .blog-grid {
-    grid-template-columns: 1fr; /* Una columna en móviles */
-    max-width: 450px;
-    margin: 0 auto;
-  }
-  .blog-title {
-    font-size: 2.5rem;
-  }
-}
-
 /* =============================================================================
-   FOOTER PRINCIPAL & NEWSLETTER FLOTANTE
+   FOOTER PRINCIPAL
 =============================================================================
 */
 .main-footer {
@@ -1142,79 +1166,6 @@ body {
   transform: translateY(0);
 }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 992px) {
-  .header-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .nav-wrapper {
-    align-items: center;
-  }
-  .social-row {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-  .menu-bar {
-    padding: 15px 20px;
-  }
-  .menu-bar ul {
-    gap: 15px;
-    font-size: 0.9rem;
-  }
-  .slide-content h1 {
-    font-size: 2rem;
-  }
-  .nosotros-content {
-    flex-direction: column;
-  }
-  .nosotros-list {
-    grid-template-columns: 1fr;
-  }
-  .centered-item {
-    grid-column: span 1;
-  }
-  .news-panel-overlay {
-    padding: 15px;
-  }
-  .servicios-grid {
-    grid-template-columns: 1fr;
-  }
-  .blog-header {
-    text-align: center;
-  }
-  .floating-news-btn {
-    right: 15px;
-    left: auto;
-    bottom: 15px;
-  }
-
-  /* Footer Mobile */
-  .newsletter-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-  .newsletter-form form {
-    flex-direction: column;
-  }
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    text-align: center;
-  }
-  .footer-col {
-    align-items: center;
-  }
-  .contact-list li {
-    justify-content: center;
-  }
-  .footer-line {
-    margin: 0 auto 20px auto;
-  }
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1308,4 +1259,117 @@ body {
 .modal-btn-close:hover {
   background-color: var(--color-primary);
   transform: translateY(-2px);
+}
+
+/* =============================================================================
+   VISTA MÓVIL PERSONALIZADA (Sobrescribe estilos para móviles)
+=============================================================================
+*/
+@media (max-width: 992px) {
+  /* 1. Header: Alineación a la derecha y ocultar logo */
+  .header-container {
+    flex-direction: row; /* Forzamos fila para alinear botón a la derecha */
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  /* 2. Ocultar Logo y Scroll Indicator */
+  .logo-box,
+  .scroll-down-indicator {
+    display: none !important;
+  }
+
+  /* 3. Botón Hamburguesa */
+  .mobile-nav-toggle {
+    display: block; /* Hacemos visible el botón */
+    margin-left: auto; /* Empujamos a la derecha si es necesario */
+  }
+
+  /* 4. Menú Desplegable (Transformación del nav-wrapper) */
+  .nav-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 0;
+    margin-top: 15px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    overflow: hidden;
+    max-height: 0; /* Oculto por defecto */
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    z-index: 999;
+  }
+
+  /* Estado abierto del menú */
+  .nav-wrapper.active {
+    max-height: 500px;
+    padding: 30px 20px;
+  }
+
+  /* 5. Ajustes de la lista del menú */
+  .menu-bar {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    width: 100%;
+    order: 1; /* Menú arriba de redes sociales */
+  }
+
+  .menu-bar ul {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .menu-bar a {
+    color: var(--color-text);
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .menu-bar a:hover {
+    color: var(--color-primary);
+  }
+
+  /* === INDICADOR DE PESTAÑA ACTIVA (MOBILE) === */
+  .menu-bar a.active-link {
+    color: var(--color-primary);
+    font-weight: 700;
+    background-color: #fff0e6; /* Fondo naranja muy suave */
+    border-bottom: 1px solid var(--color-primary); /* Resaltar borde inferior */
+  }
+
+  /* Quitar línea decorativa de desktop en móvil si existe */
+  .menu-bar a.active-link::after {
+    display: none;
+  }
+
+  /* Mostrar enlace de Inicio */
+  .mobile-home-link {
+    display: block;
+  }
+
+  /* 6. Redes Sociales en el menú móvil */
+  .social-row {
+    margin-top: 20px;
+    margin-right: 0;
+    justify-content: center;
+    order: 2;
+  }
+
+  /* Desactivar padding extra en móvil para las páginas internas si el header es relativo */
+  .about-hero,
+  .services-hero,
+  .tech-hero,
+  .news-page-header,
+  .recruit-hero,
+  .article-hero {
+    padding-top: 80px !important;
+  }
 }

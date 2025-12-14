@@ -1,11 +1,31 @@
 /**
  * ============================================================================
  * PROYECTO: NexCore Solutions - Scripts Principales
- * DESCRIPCIÓN: Carrusel, Scroll, Modales, Scroll Reveal y Lógica de Formularios.
+ * DESCRIPCIÓN: Carrusel, Scroll, Modales, Scroll Reveal, Formularios y Menú Móvil.
  * ============================================================================
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // === 0. MENÚ MÓVIL ===
+  const navToggle = document.querySelector(".mobile-nav-toggle");
+  const navWrapper = document.querySelector(".nav-wrapper");
+
+  if (navToggle && navWrapper) {
+    navToggle.addEventListener("click", () => {
+      navWrapper.classList.toggle("active");
+
+      // Cambiar icono de hamburguesa a X
+      const icon = navToggle.querySelector("i");
+      if (navWrapper.classList.contains("active")) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+      } else {
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+      }
+    });
+  }
+
   // === 1. LÓGICA DEL CARRUSEL DE HÉROE ===
   const slides = document.querySelectorAll(".slide");
   let currentSlide = 0;
@@ -25,18 +45,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // === 2. SCROLL SUAVE ===
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
+      if (this.getAttribute("href") === "#") return;
+
       e.preventDefault();
       const targetId = this.getAttribute("href");
-      if (targetId !== "#") {
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth" });
-        }
+      const targetElement = document.querySelector(targetId);
+
+      // Cerrar menú móvil si está abierto
+      if (navWrapper && navWrapper.classList.contains("active")) {
+        navWrapper.classList.remove("active");
+        const icon = navToggle.querySelector("i");
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+      }
+
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
       }
     });
   });
 
-  // === 3. LÓGICA DEL PANEL DE NOTICIAS (MODAL LATERAL) ===
+  // === 3. PANEL DE NOTICIAS ===
   const openNewsBtn = document.getElementById("open-news-panel");
   const closeNewsBtn = document.getElementById("close-news-panel");
   const newsPanel = document.getElementById("news-panel");
@@ -74,10 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", reveal);
   reveal();
 
-  // === 5. MANEJO DE FORMULARIOS Y MODAL DE ÉXITO (NUEVO) ===
+  // === 5. FORMULARIOS Y MODAL ===
   const forms = document.querySelectorAll("form");
 
-  // Crear el HTML del modal dinámicamente si no existe
   if (!document.getElementById("success-modal")) {
     const modalHTML = `
       <div id="success-modal" class="modal-overlay">
@@ -99,52 +127,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalTitle = document.getElementById("modal-title");
   const modalMsg = document.getElementById("modal-msg");
 
-  // Función para cerrar modal
-  closeModalBtn.addEventListener("click", () => {
-    successModal.classList.remove("active");
-  });
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", () => {
+      successModal.classList.remove("active");
+    });
+  }
 
-  // Cerrar al hacer clic fuera
-  successModal.addEventListener("click", (e) => {
-    if (e.target === successModal) successModal.classList.remove("active");
-  });
+  if (successModal) {
+    successModal.addEventListener("click", (e) => {
+      if (e.target === successModal) successModal.classList.remove("active");
+    });
+  }
 
-  // Interceptar todos los envíos de formularios
   forms.forEach((form) => {
     form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Evita recargar la página
-
-      // Detectar tipo de formulario para personalizar mensaje
+      e.preventDefault();
       let titleText = "¡Mensaje Enviado!";
       let msgText =
         "Gracias por contactarnos. Nuestro equipo te responderá a la brevedad.";
 
-      // 1. Es formulario de Newsletter (Footer)?
       if (form.closest(".newsletter-form")) {
         titleText = "¡Suscripción Exitosa!";
         msgText =
           "Gracias por unirte. Recibirás nuestras novedades y oportunidades pronto.";
-      }
-      // 2. Es formulario de Reclutamiento?
-      else if (form.classList.contains("recruit-form")) {
+      } else if (form.classList.contains("recruit-form")) {
         titleText = "¡Postulación Recibida!";
         msgText =
           "Hemos recibido tu CV correctamente. El equipo de RRHH lo revisará pronto.";
       }
 
-      // Actualizar textos
-      modalTitle.textContent = titleText;
-      modalMsg.textContent = msgText;
-
-      // Mostrar modal
-      successModal.classList.add("active");
-
-      // Opcional: Limpiar el formulario
+      if (modalTitle) modalTitle.textContent = titleText;
+      if (modalMsg) modalMsg.textContent = msgText;
+      if (successModal) successModal.classList.add("active");
       form.reset();
     });
   });
 
-  // Lógica extra para el input file de reclutamiento (si existe)
   const fileInput = document.querySelector(".file-input");
   if (fileInput) {
     fileInput.addEventListener("change", function () {
@@ -157,4 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // === 6. INDICADOR DE PESTAÑA ACTIVA (NUEVO) ===
+  // Detecta la URL actual y añade la clase 'active-link' al menú correspondiente
+  const currentLocation = location.href;
+  const menuItems = document.querySelectorAll(".menu-bar a");
+
+  menuItems.forEach((link) => {
+    if (link.href === currentLocation) {
+      link.classList.add("active-link");
+    }
+  });
 });
