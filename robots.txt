@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Mapa del sitio (Asegúrate de cambiar esto por tu URL final de GitHub o dominio)
+Sitemap: https://tu-usuario.github.io/nexcore/sitemap.xml

@@ -1,0 +1,318 @@
+/* =============================================================================
+   ESTILOS DE PÁGINA INDIVIDUAL DE NOTICIA (BLOG POST) - Mejorado
+   Archivo: assets/css/pages/blog-post.css
+=============================================================================
+*/
+
+/* --- 1. HEADER DEL ARTÍCULO (Imagen Principal y Título) --- */
+.article-hero {
+  position: relative;
+  height: 60vh; /* Altura generosa */
+  min-height: 450px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end; /* Texto alineado abajo */
+  justify-content: center;
+  /* IMPORTANTE: Si usas header static, quitamos el margin-top negativo si lo hubiera */
+  margin-top: 0;
+}
+
+/* Sombra oscura para leer el texto sobre la imagen */
+.article-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(39, 52, 139, 0.9) 0%,
+    rgba(39, 52, 139, 0.4) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+.article-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 5% 80px; /* Más espacio abajo (80px) */
+  color: var(--color-white);
+  text-align: center;
+}
+
+/* Metadatos (Categoría y Fecha) */
+.article-meta-top {
+  margin-bottom: 25px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.meta-category {
+  background-color: var(--color-primary);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.meta-category.cat-blue {
+  background-color: var(--color-secondary);
+}
+.meta-category.cat-cyan {
+  background-color: var(--color-accent);
+}
+
+.meta-date {
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.9;
+}
+
+/* Título Principal */
+.article-title {
+  font-size: 3rem; /* Tamaño grande pero controlado */
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- 2. CUERPO DEL ARTÍCULO (Contenido) --- */
+.article-body-section {
+  padding: 100px 5%; /* Mucho espacio arriba y abajo del texto */
+  background-color: var(--color-white);
+}
+
+.article-container {
+  max-width: 800px; /* Ancho de lectura ideal */
+  margin: 0 auto;
+  font-size: 1.2rem; /* Letra un poco más grande para leer fácil */
+  line-height: 1.9; /* Líneas separadas */
+  color: #444;
+}
+
+/* Párrafos */
+.article-container p {
+  margin-bottom: 35px; /* Separación entre párrafos */
+}
+
+/* Párrafo destacado (Lead) */
+.article-container .lead {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+  line-height: 1.6;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 30px;
+}
+
+/* Subtítulos */
+.article-container h2 {
+  font-size: 2.2rem;
+  color: var(--color-secondary);
+  font-weight: 800;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.article-container h3 {
+  font-size: 1.6rem;
+  color: var(--color-primary); /* Subtítulos en naranja */
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+/* Citas (Blockquote) mejoradas */
+.article-blockquote {
+  margin: 50px 0;
+  padding: 40px 50px;
+  background-color: #f9f9f9; /* Fondo gris muy suave */
+  border-left: 6px solid var(--color-primary);
+  font-size: 1.35rem;
+  font-style: italic;
+  color: #333;
+  position: relative;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.article-blockquote footer {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.article-blockquote footer::before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: var(--color-secondary);
+}
+
+/* Listas */
+.article-container ul,
+.article-container ol {
+  margin-bottom: 40px;
+  padding-left: 20px;
+}
+
+.article-container li {
+  margin-bottom: 15px;
+  padding-left: 10px;
+}
+
+.article-container li::marker {
+  color: var(--color-primary); /* Viñetas naranjas */
+  font-weight: bold;
+}
+
+/* --- 3. NAVEGACIÓN Y FOOTER DEL ARTÍCULO --- */
+.article-footer {
+  max-width: 800px;
+  margin: 80px auto 0;
+  padding-top: 50px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-to-blog-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background-color: #f0f0f0;
+  transition: all 0.3s;
+}
+
+.back-to-blog-btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  transform: translateX(-5px);
+}
+
+.share-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.share-box span {
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.share-links a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background-color: var(--color-white);
+  color: var(--color-secondary);
+  border: 2px solid #eee;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.share-links a:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .article-title {
+    font-size: 2.2rem;
+  }
+  .article-hero {
+    height: 50vh;
+    min-height: 400px;
+  }
+  .article-body-section {
+    padding: 60px 5%;
+  }
+  .article-container {
+    font-size: 1.1rem;
+  }
+  .article-blockquote {
+    padding: 30px;
+    font-size: 1.2rem;
+  }
+  .article-footer {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+}
+
+/* --- CAJA DEL LOGO (ACTUALIZADO: Grande, Redondeada y Segura) --- */
+.logo-box {
+  background-color: var(--color-white);
+  padding: 10px 30px; /* Padding equilibrado */
+
+  /* BORDES REDONDEADOS */
+  border-radius: 35px;
+
+  /* CLAVE: Esto recorta cualquier esquina cuadrada de la imagen interna */
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Dimensiones flexibles para logo grande */
+  min-height: 110px;
+  min-width: 230px;
+
+  transition: transform 0.3s ease;
+}
+
+.logo-box:hover {
+  transform: translateY(-2px);
+}
+
+.logo-img {
+  /* TAMAÑO GRANDE */
+  max-height: 120px;
+  width: auto;
+  display: block;
+
+  /* OPCIONAL: Redondea la propia imagen (útil si tiene fondo) */
+  border-radius: 15px;
+
+  /* Asegura que la imagen se ajuste bien */
+  object-fit: contain;
+}

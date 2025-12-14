@@ -1,0 +1,92 @@
+/* --- ESTILOS DE LA PÁGINA NOTICIAS (LISTADO) --- */
+
+/* 1. Header Estático (Fondo Blanco) */
+/* Copiado de nosotros.css para mantener consistencia */
+.nexcore-header.static-header {
+  position: relative;
+  top: 0;
+  background-color: #eaf6fb;
+  padding: 15px 5%;
+}
+
+/* 2. Cabecera de la sección Noticias */
+.news-page-header {
+  background-color: #eaf6fb; /* Gris muy suave */
+  padding: 60px 0 40px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.news-page-header .main-title {
+  font-size: 3rem;
+  color: var(--color-secondary);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.news-page-header .text-orange {
+  color: var(--color-primary);
+}
+
+.news-page-header .tagline {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* 3. Ajustes de la Grilla para esta página */
+.section-blog {
+  padding-top: 60px;
+  background-color: var(--color-white);
+}
+
+/* Estilo del link activo en el menú */
+.menu-bar a.active-link {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 5px;
+}
+
+/* 
+BLOQUE DE LA IMAGEN LOGO
+*/
+/* --- CAJA DEL LOGO (ACTUALIZADO: Grande, Redondeada y Segura) --- */
+.logo-box {
+  background-color: var(--color-white);
+  padding: 10px 30px; /* Padding equilibrado */
+
+  /* BORDES REDONDEADOS */
+  border-radius: 35px;
+
+  /* CLAVE: Esto recorta cualquier esquina cuadrada de la imagen interna */
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Dimensiones flexibles para logo grande */
+  min-height: 110px;
+  min-width: 230px;
+
+  transition: transform 0.3s ease;
+}
+
+.logo-box:hover {
+  transform: translateY(-2px);
+}
+
+.logo-img {
+  /* TAMAÑO GRANDE */
+  max-height: 120px;
+  width: auto;
+  display: block;
+
+  /* OPCIONAL: Redondea la propia imagen (útil si tiene fondo) */
+  border-radius: 15px;
+
+  /* Asegura que la imagen se ajuste bien */
+  object-fit: contain;
+}
