@@ -1373,3 +1373,67 @@ body {
     padding-top: 80px !important;
   }
 }
+
+@media (max-width: 768px) {
+  /* 1. Ajuste del Newsletter Flotante */
+  .newsletter-container {
+    padding: 30px 20px;
+    margin-bottom: 30px; /* Espacio extra abajo */
+  }
+
+  .newsletter-content {
+    flex-direction: column; /* Apilar texto y formulario */
+    text-align: center;
+    gap: 25px;
+  }
+
+  .newsletter-form form {
+    flex-direction: column; /* Input arriba, botón abajo */
+    width: 100%;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    width: 100%; /* Ocupar todo el ancho */
+  }
+
+  /* 2. Cuerpo del Footer */
+  .footer-body {
+    padding-top: 120px; /* Ajuste para compensar el newsletter apilado */
+    padding-bottom: 40px;
+    text-align: center; /* Centrar todo el contenido */
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 50px; /* Separación entre secciones */
+  }
+
+  /* 3. Centrar elementos específicos */
+  .footer-logo-box {
+    margin: 0 auto 20px auto; /* Centrar caja del logo */
+    display: flex; /* Asegura que flexbox lo centre */
+  }
+
+  .footer-line {
+    margin: 0 auto 20px auto; /* Centrar la línea decorativa naranja */
+  }
+
+  /* Centrar iconos y texto de contacto */
+  .contact-list li {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Centrar enlaces (hover effect adjustment) */
+  .footer-links a:hover {
+    padding-left: 0; /* Quitar efecto de desplazamiento lateral en móvil */
+    color: var(--color-primary);
+    transform: scale(1.05); /* Cambiar por un pequeño zoom */
+  }
+
+  /* Centrar horarios */
+  .schedule-info {
+    justify-content: center;
+  }
+}
